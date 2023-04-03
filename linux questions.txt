@@ -1,0 +1,96 @@
+upgrade ubuntu from low - high
+sudo update-manager -d
+ 
+linux lvm
+fdisk -l
+fdisk /dev/sdb
+:p
+:n
+:p
+:1
+:2048
+:+2G
+:t
+:8e
+:p
+:wq
+
+partprobe /dev/sdb
+
+fdisk /dev/sdc
+:p
+:n
+:p
+:t
+:wq
+
+fdisk -l /dev/sdb
+
+fdisk -l /dev/sdc
+
+pvcreate /dev/sdb1 /dev/sdc1
+
+pvs
+
+vgcreate VG0 /dev/sdb1 /dev/sdc1
+
+vgs
+
+lvcreate -n lv0 -L +3G VG0
+
+lvdisplay /dev/VG0/lv0
+
+mkfs.ext4 /dev/VG0/lv0
+
+mkdir /lv0
+
+mount /dev/VG0/lv0 /lv0
+
+cd /lv0/
+
+touch 7hills{1..100}.txt
+
+
+
+
+
+linux user administration:
+---------------------------
+
+/etc/passwd -- user
+
+/etc/shadow -- passwords
+
+useradd prudhvi 
+
+cat /etc/shadow
+
+passwd prudhvi 
+:113apdtr
+:113apdtr
+
+cat /etc/shadow
+
+cat /etc/passwd
+
+useradd -u 1024 prudhv 
+
+cat /etc/passwd
+
+groupadd opengrp
+
+cat /etc/group
+
+usermod -g opengrp prudhv
+
+passwd -l prudhv
+
+passwd -u prudhv
+
+usermod -l nath prudhv
+
+userdel -r prudhvi
+
+userdel -r nath
+
+
